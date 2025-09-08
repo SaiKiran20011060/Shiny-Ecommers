@@ -129,15 +129,11 @@ custom_css = ui.tags.style("""
     
     /* Header Styling */
     .main-title {
-        background: linear-gradient(45deg, #667eea, #764ba2);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
+        color: black;
         font-size: 3rem;
         font-weight: bold;
         text-align: center;
         margin-bottom: 30px;
-        text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
     }
     
     /* Sidebar Styling */
@@ -427,7 +423,7 @@ login_ui = ui.page_fluid(
         ui.div(
             ui.div(
                 ui.h1("🛍️ ShinyCommerce", class_="main-title", style="margin-bottom: 10px;"),
-                ui.p("Welcome to the future of shopping", style="text-align: center; color: #7f8c8d; font-size: 1.1em; margin-bottom: 30px;"),
+                ui.p("Welcome to the future of shopping", style="text-align: center; color: black; font-size: 1.1em; margin-bottom: 30px;"),
                 style="text-align: center; margin-bottom: 40px;"
             ),
             ui.div(

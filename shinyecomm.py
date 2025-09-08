@@ -96,74 +96,427 @@ USERS = {
     'demo': 'demo'
 }
 
+# Custom CSS for modern styling
+custom_css = ui.tags.style("""
+    /* Global Styles */
+    body {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+    
+    .main-container {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        border-radius: 20px;
+        margin: 20px;
+        padding: 30px;
+        box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        animation: fadeInUp 0.8s ease-out;
+    }
+    
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    /* Header Styling */
+    .main-title {
+        background: linear-gradient(45deg, #667eea, #764ba2);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        font-size: 3rem;
+        font-weight: bold;
+        text-align: center;
+        margin-bottom: 30px;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+    }
+    
+    /* Sidebar Styling */
+    .sidebar {
+        background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        border-radius: 15px;
+        padding: 5px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        color: white;
+        min-width: 300px;
+    }
+    
+    .sidebar h4 {
+        color: white;
+        font-weight: bold;
+        margin-bottom: 25px;
+        text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+        font-size: 1.3em;
+    }
+    
+    .sidebar .form-group {
+        margin-bottom: 20px;
+    }
+    
+    .sidebar .form-group label {
+        color: white;
+        font-weight: 500;
+        margin-bottom: 8px;
+        display: block;
+        font-size: 1.05em;
+    }
+    
+    .sidebar .form-control {
+        border-radius: 12px;
+        border: none;
+        background: rgba(255,255,255,0.9);
+        backdrop-filter: blur(5px);
+        transition: all 0.3s ease;
+        padding: 12px 15px;
+        width: 100%;
+    }
+    
+    .sidebar .form-control:focus {
+        background: white;
+        box-shadow: 0 0 15px rgba(255,255,255,0.5);
+        transform: scale(1.02);
+    }
+    
+    /* Product Cards */
+    .product-card {
+        background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+        border: none;
+        border-radius: 20px;
+        padding: 25px;
+        margin: 15px;
+        box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .product-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+        transition: left 0.5s;
+    }
+    
+    .product-card:hover::before {
+        left: 100%;
+    }
+    
+    .product-card:hover {
+        transform: translateY(-10px) scale(1.02);
+        box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+    }
+    
+    .product-card img {
+        border-radius: 15px;
+        transition: transform 0.3s ease;
+    }
+    
+    .product-card:hover img {
+        transform: scale(1.05);
+    }
+    
+    .product-card h5 {
+        color: #2c3e50;
+        font-weight: bold;
+        margin: 15px 0 10px 0;
+    }
+    
+    .product-card p {
+        color: #7f8c8d;
+        margin: 5px 0;
+    }
+    
+    /* Buttons */
+    .btn {
+        border-radius: 25px;
+        padding: 10px 25px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        transition: all 0.3s ease;
+        border: none;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .btn-primary {
+        background: linear-gradient(45deg, #667eea, #764ba2);
+        color: white;
+    }
+    
+    .btn-primary:hover {
+        background: linear-gradient(45deg, #764ba2, #667eea);
+        transform: translateY(-2px);
+        box-shadow: 0 10px 20px rgba(102, 126, 234, 0.4);
+    }
+    
+    .btn-success {
+        background: linear-gradient(45deg, #56ab2f, #a8e6cf);
+        color: white;
+    }
+    
+    .btn-success:hover {
+        background: linear-gradient(45deg, #a8e6cf, #56ab2f);
+        transform: translateY(-2px);
+        box-shadow: 0 10px 20px rgba(86, 171, 47, 0.4);
+    }
+    
+    .btn-warning {
+        background: linear-gradient(45deg, #f093fb, #f5576c);
+        color: white;
+    }
+    
+    .btn-warning:hover {
+        background: linear-gradient(45deg, #f5576c, #f093fb);
+        transform: translateY(-2px);
+        box-shadow: 0 10px 20px rgba(245, 87, 108, 0.4);
+    }
+    
+    .btn-danger {
+        background: linear-gradient(45deg, #ff416c, #ff4b2b);
+        color: white;
+    }
+    
+    .btn-danger:hover {
+        background: linear-gradient(45deg, #ff4b2b, #ff416c);
+        transform: translateY(-2px);
+        box-shadow: 0 10px 20px rgba(255, 65, 108, 0.4);
+    }
+    
+    /* Navigation Tabs */
+    .nav-tabs {
+        border: none;
+        margin-bottom: 30px;
+    }
+    
+    .nav-tabs .nav-link {
+        border: none;
+        border-radius: 25px;
+        margin: 0 5px;
+        padding: 12px 25px;
+        background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        color: white;
+        font-weight: 600;
+        transition: all 0.3s ease;
+    }
+    
+    .nav-tabs .nav-link:hover {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        transform: translateY(-2px);
+        box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+    }
+    
+    .nav-tabs .nav-link.active {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+    }
+    
+    /* Cart Section */
+    .cart-section {
+        background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+        border-radius: 15px;
+        padding: 20px;
+        margin: 20px 0;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+    
+    .cart-item {
+        background: white;
+        border-radius: 15px;
+        padding: 20px;
+        margin: 15px 0;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        transition: transform 0.3s ease;
+    }
+    
+    .cart-item:hover {
+        transform: translateX(5px);
+    }
+    
+    /* Form Styling */
+    .form-control {
+        border-radius: 15px;
+        border: 2px solid #e9ecef;
+        padding: 12px 20px;
+        transition: all 0.3s ease;
+        background: rgba(255,255,255,0.9);
+    }
+    
+    .form-control:focus {
+        border-color: #667eea;
+        box-shadow: 0 0 20px rgba(102, 126, 234, 0.2);
+        transform: scale(1.02);
+    }
+    
+    /* Order Cards */
+    .order-card {
+        background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+        border-radius: 20px;
+        padding: 25px;
+        margin: 20px 0;
+        box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        transition: transform 0.3s ease;
+    }
+    
+    .order-card:hover {
+        transform: translateY(-5px);
+    }
+    
+    /* Animations */
+    @keyframes pulse {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.05); }
+        100% { transform: scale(1); }
+    }
+    
+    .pulse-animation {
+        animation: pulse 2s infinite;
+    }
+    
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        .main-title {
+            font-size: 2rem;
+        }
+        
+        .product-card {
+            margin: 10px 5px;
+            padding: 15px;
+        }
+        
+        .main-container {
+            margin: 10px;
+            padding: 20px;
+        }
+    }
+    
+    /* Loading Animation */
+    .loading {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        border: 3px solid rgba(255,255,255,.3);
+        border-radius: 50%;
+        border-top-color: #fff;
+        animation: spin 1s ease-in-out infinite;
+    }
+    
+    @keyframes spin {
+        to { transform: rotate(360deg); }
+    }
+""")
+
 # Login UI
 login_ui = ui.page_fluid(
+    custom_css,
     ui.div(
         ui.div(
-            ui.h2("🛍️ E-Commerce Store Login", style="text-align: center; color: #007bff;"),
-            ui.br(),
-            ui.input_text("email", "Email:", placeholder="Enter your email"),
             ui.div(
-                ui.output_ui("email_verify_button"),
-                style="margin-top: 5px;"
+                ui.h1("🛍️ ShinyCommerce", class_="main-title", style="margin-bottom: 10px;"),
+                ui.p("Welcome to the future of shopping", style="text-align: center; color: #7f8c8d; font-size: 1.1em; margin-bottom: 30px;"),
+                style="text-align: center; margin-bottom: 40px;"
             ),
-            ui.output_ui("email_otp_section"),
-            ui.br(),
             ui.div(
-                ui.h5("Demo Emails:"),
-                ui.p("admin@demo.com | user@demo.com | demo@demo.com"),
-                style="background-color: #f8f9fa; padding: 15px; border-radius: 5px; border: 1px solid #dee2e6;"
+                ui.h3("🔐 Login", style="text-align: center; color: #2c3e50; margin-bottom: 25px;"),
+                ui.input_text("email", "📧 Email:", placeholder="Enter your email address"),
+                ui.div(
+                    ui.output_ui("email_verify_button"),
+                    style="margin-top: 15px;"
+                ),
+                ui.output_ui("email_otp_section"),
+                ui.br(),
+                ui.div(
+                    ui.h5("🎯 Demo Accounts:", style="color: #2c3e50; margin-bottom: 10px;"),
+                    ui.div(
+                        ui.span("👨💼 admin@demo.com", style="display: block; margin: 5px 0; color: #3498db;"),
+                        ui.span("👤 user@demo.com", style="display: block; margin: 5px 0; color: #27ae60;"),
+                        ui.span("🎆 demo@demo.com", style="display: block; margin: 5px 0; color: #e74c3c;"),
+                    ),
+                    style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%); padding: 20px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); margin: 20px 0;"
+                ),
+                ui.output_ui("login_message"),
+                style="background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); padding: 40px; border-radius: 25px; box-shadow: 0 25px 50px rgba(0,0,0,0.15); max-width: 450px; margin: 0 auto; animation: fadeInUp 0.8s ease-out;"
             ),
-            ui.output_ui("login_message"),
-            style="max-width: 400px; margin: 0 auto; padding: 30px; border: 1px solid #ddd; border-radius: 10px; background-color: white; box-shadow: 0 4px 6px rgba(0,0,0,0.1);"
-        ),
-        style="min-height: 100vh; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); display: flex; align-items: center; justify-content: center; padding: 20px;"
+            style="min-height: 100vh; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); display: flex; align-items: center; justify-content: center; padding: 20px;"
+        )
     )
 )
 
 # Main store UI
 store_ui = ui.page_fluid(
-    ui.h1("E-Commerce Store"),
-    ui.layout_sidebar(
-        ui.sidebar(
-            ui.input_select("category_filter", "Filter by Category:",
-                          choices=['All'] + list(products['category'].unique()),
-                          selected="All"),
-            ui.input_slider("price_range", "Price Range ($):", 
-                          min=int(products['price'].min()), 
-                          max=int(products['price'].max()),
-                          value=[10, 500]),
-            ui.input_numeric("min_rating", "Minimum Rating:", value=3.0, min=1.0, max=5.0, step=0.1),
-            ui.hr(),
-            ui.output_ui("cart_title"),
-            ui.output_ui("cart_summary")
-        ),
-        ui.navset_tab(
-            ui.nav_panel("Products",
-                ui.output_ui("product_grid")
-            ),
-            ui.nav_panel("Cart",
-                ui.output_ui("cart_details"),
-                ui.br(),
-                ui.output_ui("checkout_section")
-            ),
-            ui.nav_panel("My Orders",
-                ui.output_ui("orders_list")
-            ),
-            ui.nav_panel("Analytics",
-                ui.row(
-                    ui.column(6, ui.output_plot("sales_by_category")),
-                    ui.column(6, ui.output_plot("price_distribution"))
+    custom_css,
+    ui.div(
+        ui.h1("🛍️ ShinyCommerce", class_="main-title"),
+        ui.layout_sidebar(
+            ui.sidebar(
+                ui.div(
+                    ui.h4("🎯 Filters", style="color: white; text-align: center; margin-bottom: 30px;"),
+                    ui.div(
+                        ui.input_select("category_filter", "📂 Category:",
+                                      choices=['All'] + list(products['category'].unique()),
+                                      selected="All"),
+                        style="margin-bottom: 20px;"
+                    ),
+                    ui.div(
+                        ui.input_slider("price_range", "💰 Price Range ($):", 
+                                      min=int(products['price'].min()), 
+                                      max=int(products['price'].max()),
+                                      value=[10, 500]),
+                        style="margin-bottom: 20px;"
+                    ),
+                    ui.div(
+                        ui.input_numeric("min_rating", "⭐ Min Rating:", value=3.0, min=1.0, max=5.0, step=0.1),
+                        style="margin-bottom: 25px;"
+                    ),
+                    ui.hr(style="border-color: rgba(255,255,255,0.3); margin: 20px 0;"),
+                    ui.output_ui("cart_title"),
+                    ui.output_ui("cart_summary"),
+                    class_="sidebar"
                 ),
-                ui.row(
-                    ui.column(12, ui.output_data_frame("products_table"))
+                width=350
+            ),
+            ui.navset_tab(
+                ui.nav_panel("Products",
+                    ui.output_ui("product_grid")
+                ),
+                ui.nav_panel("Cart",
+                    ui.output_ui("cart_details"),
+                    ui.br(),
+                    ui.output_ui("checkout_section")
+                ),
+                ui.nav_panel("My Orders",
+                    ui.output_ui("orders_list")
+                ),
+                ui.nav_panel("Analytics",
+                    ui.row(
+                        ui.column(6, ui.output_plot("sales_by_category")),
+                        ui.column(6, ui.output_plot("price_distribution"))
+                    ),
+                    ui.row(
+                        ui.column(12, ui.output_data_frame("products_table"))
+                    )
                 )
             )
-        )
+        ),
+        class_="main-container"
     ),
     ui.div(
-        ui.input_action_button("logout_btn", "Logout", class_="btn-outline-secondary btn-sm", style="position: fixed; top: 10px; right: 10px; z-index: 1000;"),
-        ui.output_ui("current_user", style="position: fixed; top: 10px; left: 10px; z-index: 1000; background: rgba(255,255,255,0.9); padding: 5px 10px; border-radius: 5px;")
+        ui.input_action_button("logout_btn", "😪 Logout", class_="btn-danger btn-sm", style="position: fixed; top: 20px; right: 20px; z-index: 1000; border-radius: 25px; padding: 10px 20px; font-weight: 600;"),
+        ui.output_ui("current_user", style="position: fixed; top: 20px; left: 20px; z-index: 1000; background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%); padding: 10px 20px; border-radius: 25px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); font-weight: 600;")
     )
 )
 
@@ -198,7 +551,7 @@ def server(input, output, session):
     @render.ui
     def current_user():
         if is_logged_in():
-            return ui.span(f"👤 Welcome, {logged_in_user()}!", style="font-weight: bold; color: #007bff;")
+            return ui.span(f"👤 Welcome, {logged_in_user()}!", style="color: #2c3e50;")
         return ui.span()
     
     # Email OTP functions
@@ -352,14 +705,14 @@ def server(input, output, session):
                                                      class_="btn-primary btn-sm")
             
             product_card = ui.div(
-                ui.img(src=product['image'], style="width: 100%; height: 150px; object-fit: cover; border-radius: 5px; margin-bottom: 10px;"),
-                ui.h5(product['name']),
-                ui.p(f"Category: {product['category']}"),
-                ui.p(f"Price: ${product['price']}"),
-                ui.p(f"Rating: {'⭐' * int(product['rating'])} ({product['rating']})"),
-                ui.p(f"Stock: {product['stock']}", class_=stock_color),
-                cart_controls,
-                style="border: 1px solid #ddd; padding: 15px; margin: 10px; border-radius: 5px; background-color: #fff;"
+                ui.img(src=product['image'], style="width: 100%; height: 180px; object-fit: cover; border-radius: 15px; margin-bottom: 15px;"),
+                ui.h5(product['name'], style="color: #2c3e50; font-weight: bold;"),
+                ui.p(f"📂 {product['category']}", style="color: #7f8c8d; font-size: 0.9em;"),
+                ui.p(f"💰 ${product['price']}", style="color: #27ae60; font-weight: bold; font-size: 1.1em;"),
+                ui.p(f"{'⭐' * int(product['rating'])} ({product['rating']})", style="color: #f39c12;"),
+                ui.p(f"📦 {product['stock']} in stock", class_=stock_color, style="font-size: 0.9em;"),
+                ui.div(cart_controls, style="margin-top: 15px;"),
+                class_="product-card"
             )
             products_ui.append(ui.column(4, product_card))
         
@@ -369,7 +722,7 @@ def server(input, output, session):
     def cart_title():
         cart_items = cart()
         total_items = len(cart_items)
-        return ui.h4(f"🛍️ Shopping Cart ({total_items})")
+        return ui.h4(f"🛍️ Cart ({total_items})", style="color: white; text-align: center; margin-bottom: 20px;")
     
     @render.ui
     def cart_summary():
@@ -390,9 +743,12 @@ def server(input, output, session):
         total_quantity = sum(item['quantity'] for item in item_counts.values())
         
         return ui.div(
-            ui.p(f"Unique Items: {unique_items}"),
-            ui.p(f"Total Quantity: {total_quantity}"),
-            ui.p(f"Total: ${total_price:.2f}")
+            ui.div(
+                ui.p(f"📦 Items: {unique_items}", style="color: white; margin: 8px 0; font-size: 1.1em;"),
+                ui.p(f"🔢 Qty: {total_quantity}", style="color: white; margin: 8px 0; font-size: 1.1em;"),
+                ui.p(f"💰 ${total_price:.2f}", style="color: white; font-weight: bold; font-size: 1.3em; margin: 12px 0;"),
+                style="background: rgba(255,255,255,0.25); padding: 25px 20px; border-radius: 15px; backdrop-filter: blur(8px); border: 2px solid rgba(255,255,255,0.1);"
+            )
         )
     
     @render.ui
@@ -422,25 +778,31 @@ def server(input, output, session):
                 ui.div(
                     ui.row(
                         ui.column(8,
-                            ui.h5(item['name']),
-                            ui.p(f"Price: ${item['price']} each"),
-                            ui.p(f"Quantity: {item['quantity']}"),
-                            ui.p(f"Subtotal: ${subtotal:.2f}"),
-                            ui.p(f"Category: {item['category']}")
+                            ui.h5(item['name'], style="color: #2c3e50; margin-bottom: 10px;"),
+                            ui.p(f"💰 ${item['price']} each", style="color: #27ae60; font-weight: 500;"),
+                            ui.p(f"🔢 Quantity: {item['quantity']}", style="color: #7f8c8d;"),
+                            ui.p(f"💵 Subtotal: ${subtotal:.2f}", style="color: #e74c3c; font-weight: bold;"),
+                            ui.p(f"📂 {item['category']}", style="color: #9b59b6; font-size: 0.9em;")
                         ),
                         ui.column(4,
-                            ui.input_action_button(f"remove_{item_id}", "Remove One", 
-                                                 class_="btn-warning btn-sm mb-2"),
-                            ui.br(),
-                            ui.input_action_button(f"remove_all_{item_id}", "Remove All", 
-                                                 class_="btn-danger btn-sm")
+                            ui.div(
+                                ui.input_action_button(f"remove_{item_id}", "➖ Remove One", 
+                                                     class_="btn-warning btn-sm mb-2", style="width: 100%;"),
+                                ui.input_action_button(f"remove_all_{item_id}", "🗑️ Remove All", 
+                                                     class_="btn-danger btn-sm", style="width: 100%;"),
+                                style="text-align: center;"
+                            )
                         )
                     ),
-                    ui.hr()
+                    class_="cart-item"
                 )
             )
         
-        cart_ui.append(ui.h4(f"Total: ${total:.2f}"))
+        cart_ui.append(
+            ui.div(
+                ui.h3(f"💰 Total: ${total:.2f}", style="text-align: center; color: #2c3e50; background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%); padding: 20px; border-radius: 15px; margin: 20px 0; box-shadow: 0 10px 30px rgba(0,0,0,0.1);")
+            )
+        )
         return ui.div(*cart_ui)
     
     @render.ui
@@ -464,23 +826,26 @@ def server(input, output, session):
                 )
             
             order_card = ui.div(
-                ui.h4(f"Order #{len(order_history) - i + 1}"),
-                ui.p(f"📅 Date: {order['date']}"),
-                ui.p(f"📍 Shipping to: {order['address']['name']}"),
-                ui.p(f"📧 Address: {order['address']['full_address']}"),
-                ui.p(f"📞 Phone: {order['address']['phone']}"),
-                ui.h5("Items:"),
-                *order_items,
-                ui.h5(f"💰 Total: ${total:.2f}"),
-                ui.p(f"📦 Status: {order['status']}"),
-                style="border: 1px solid #ddd; padding: 15px; margin: 10px 0; border-radius: 5px; background-color: #f8f9fa;"
+                ui.div(
+                    ui.h4(f"🛍️ Order #{len(order_history) - i + 1}", style="color: #2c3e50; margin-bottom: 15px;"),
+                    ui.p(f"📅 {order['date']}", style="color: #7f8c8d; font-size: 0.9em;"),
+                    ui.p(f"👤 {order['address']['name']}", style="color: #34495e; font-weight: 500;"),
+                    ui.p(f"📍 {order['address']['full_address']}", style="color: #7f8c8d;"),
+                    ui.p(f"📞 {order['address']['phone']}", style="color: #7f8c8d;"),
+                    ui.h5("📦 Items:", style="color: #2c3e50; margin: 15px 0 10px 0;"),
+                    *order_items,
+                    ui.div(
+                        ui.h5(f"💰 Total: ${total:.2f}", style="color: #27ae60; font-weight: bold;"),
+                        ui.span(f"📦 {order['status']}", style="background: #3498db; color: white; padding: 5px 15px; border-radius: 20px; font-size: 0.8em;"),
+                        style="display: flex; justify-content: space-between; align-items: center; margin-top: 15px;"
+                    ),
+                    class_="order-card"
+                )
             )
             orders_ui.append(order_card)
         
         return ui.div(*orders_ui)
-    
 
-    
     @render.ui
     def checkout_section():
         cart_items = cart()
@@ -491,168 +856,29 @@ def server(input, output, session):
             )
         
         return ui.div(
-            ui.h4("Shipping Address"),
+            ui.div(
+                ui.h4("🚚 Shipping Address", style="color: #2c3e50; text-align: center; margin-bottom: 25px;"),
+                class_="cart-section"
+            ),
             ui.row(
                 ui.column(6, ui.input_text("full_name", "Full Name:", placeholder="Enter your full name")),
-                ui.column(6, ui.tags.div(
-                    ui.tags.label("Phone:"),
-                    ui.tags.input(
-                        type="text", 
-                        id="phone-input", 
-                        placeholder="Enter 10-digit phone number",
-                        style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;",
-                        oninput="validatePhoneInput(this, 'phone-error')"
-                    ),
-                    ui.div(ui.input_text("phone", ""), style="display: none;"),
-                    ui.tags.div(
-                        ui.tags.span("⚠️ Phone number must be exactly 10 digits!"),
-                        ui.tags.button("×", onclick="closePopup('phone-error')", 
-                                      style="float: right; background: none; border: none; font-size: 18px; cursor: pointer;"),
-                        id="phone-error",
-                        style="display: none; background: #f8d7da; color: #721c24; padding: 10px; margin-top: 5px; border-radius: 4px; border: 1px solid #f5c6cb;"
-                    )
-                ))
+                ui.column(6, ui.input_text("phone", "Phone:", placeholder="Enter phone number"))
             ),
             ui.input_text("address", "Address:", placeholder="Enter street address"),
             ui.row(
                 ui.column(4, ui.input_text("city", "City:", placeholder="City")),
                 ui.column(4, ui.input_text("state", "State:", placeholder="State")),
-                ui.column(4, ui.tags.div(
-                    ui.tags.label("ZIP Code:"),
-                    ui.tags.input(
-                        type="text", 
-                        id="zipcode-input", 
-                        placeholder="Enter ZIP code",
-                        style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;",
-                        oninput="validateNumericInput(this, 'zipcode-error')"
-                    ),
-                    ui.div(ui.input_text("zipcode", ""), style="display: none;"),
-                    ui.tags.div(
-                        ui.tags.span("⚠️ ZIP code must contain only numbers!"),
-                        ui.tags.button("×", onclick="closePopup('zipcode-error')", 
-                                      style="float: right; background: none; border: none; font-size: 18px; cursor: pointer;"),
-                        id="zipcode-error",
-                        style="display: none; background: #f8d7da; color: #721c24; padding: 10px; margin-top: 5px; border-radius: 4px; border: 1px solid #f5c6cb;"
-                    )
-                ))
+                ui.column(4, ui.input_text("zipcode", "ZIP Code:", placeholder="ZIP code"))
             ),
-            ui.tags.script("""
-                function validateNumericInput(input, errorId) {
-                    const value = input.value;
-                    const errorDiv = document.getElementById(errorId);
-                    
-                    // Sync with hidden Shiny input for ZIP code
-                    if (input.id === 'zipcode-input') {
-                        const hiddenZipcode = document.querySelector('input[id*="zipcode"][style*="display: none"]');
-                        if (hiddenZipcode) {
-                            hiddenZipcode.value = input.value;
-                            hiddenZipcode.dispatchEvent(new Event('input', { bubbles: true }));
-                        }
-                    }
-                    
-                    if (value && !/^[0-9]*$/.test(value)) {
-                        errorDiv.style.display = 'block';
-                        input.style.borderColor = '#dc3545';
-                    } else {
-                        errorDiv.style.display = 'none';
-                        input.style.borderColor = '#ccc';
-                    }
-                    checkFormValidity();
-                }
-                
-                window.syncCustomInputs = function() {
-                    const phoneInput = document.getElementById('phone-input');
-                    const hiddenPhone = document.querySelector('input[id*="phone"][style*="display: none"]');
-                    if (phoneInput && hiddenPhone) {
-                        hiddenPhone.value = phoneInput.value;
-                        hiddenPhone.dispatchEvent(new Event('input', { bubbles: true }));
-                    }
-                    
-                    const zipcodeInput = document.getElementById('zipcode-input');
-                    const hiddenZipcode = document.querySelector('input[id*="zipcode"][style*="display: none"]');
-                    if (zipcodeInput && hiddenZipcode) {
-                        hiddenZipcode.value = zipcodeInput.value;
-                        hiddenZipcode.dispatchEvent(new Event('input', { bubbles: true }));
-                    }
-                }
-                
-                function closePopup(errorId) {
-                    const errorDiv = document.getElementById(errorId);
-                    const inputId = errorId.replace('-error', '-input');
-                    const input = document.getElementById(inputId);
-                    
-                    errorDiv.style.display = 'none';
-                    if (input) {
-                        input.style.borderColor = '#ccc';
-                    }
-                    checkFormValidity();
-                }
-                
-                function validatePhoneInput(input, errorId) {
-                    const value = input.value;
-                    const errorDiv = document.getElementById(errorId);
-                    
-                    input.value = value.replace(/[^0-9]/g, '');
-                    
-                    // Sync with hidden Shiny input
-                    const hiddenPhone = document.querySelector('input[id*="phone"][style*="display: none"]');
-                    if (hiddenPhone) {
-                        hiddenPhone.value = input.value;
-                        hiddenPhone.dispatchEvent(new Event('input', { bubbles: true }));
-                    }
-                    
-                    if (input.value && (input.value.length !== 10 || !/^[0-9]{10}$/.test(input.value))) {
-                        errorDiv.style.display = 'block';
-                        input.style.borderColor = '#dc3545';
-                    } else {
-                        errorDiv.style.display = 'none';
-                        input.style.borderColor = '#ccc';
-                    }
-                    checkFormValidity();
-                }
-                
-                function checkFormValidity() {
-                    const fullName = document.querySelector('input[id*="full_name"]')?.value || '';
-                    const phone = document.getElementById('phone-input')?.value || '';
-                    const address = document.querySelector('input[id*="address"]')?.value || '';
-                    const city = document.querySelector('input[id*="city"]')?.value || '';
-                    const state = document.querySelector('input[id*="state"]')?.value || '';
-                    const zipcode = document.getElementById('zipcode-input')?.value || '';
-                    
-                    const allFilled = fullName && phone && address && city && state && zipcode;
-                    const phoneValid = /^[0-9]{10}$/.test(phone);
-                    const zipcodeValid = /^[0-9]+$/.test(zipcode);
-                    
-                    const placeOrderBtn = document.querySelector('button[id*="place_order"]');
-                    if (placeOrderBtn) {
-                        if (allFilled && phoneValid && zipcodeValid) {
-                            placeOrderBtn.disabled = false;
-                            placeOrderBtn.style.opacity = '1';
-                        } else {
-                            placeOrderBtn.disabled = true;
-                            placeOrderBtn.style.opacity = '0.6';
-                        }
-                    }
-                }
-                
-                document.addEventListener('DOMContentLoaded', function() {
-                    setTimeout(function() {
-                        const inputs = document.querySelectorAll('input[id*="full_name"], input[id*="phone"], input[id*="address"], input[id*="city"], input[id*="state"], #zipcode-input');
-                        inputs.forEach(input => {
-                            input.addEventListener('input', checkFormValidity);
-                        });
-                        checkFormValidity();
-                    }, 500);
-                });
-            """),
             ui.br(),
-            ui.row(
-                ui.column(6, ui.input_action_button("clear_cart", "Clear Cart", class_="btn-warning")),
-                ui.column(6, ui.input_action_button("place_order", "Place Order", class_="btn-success", disabled=True))
+            ui.div(
+                ui.row(
+                    ui.column(6, ui.input_action_button("clear_cart", "🗑️ Clear Cart", class_="btn-warning", style="width: 100%; padding: 15px; font-size: 1.1em;")),
+                    ui.column(6, ui.input_action_button("place_order", "🛒 Place Order", class_="btn-success", style="width: 100%; padding: 15px; font-size: 1.1em;"))
+                ),
+                style="margin-top: 30px;"
             )
         )
-    
-
     
     @render.plot
     def sales_by_category():
@@ -755,9 +981,7 @@ def server(input, output, session):
     for pid in products['id']:
         remove_one_handler(pid)
         remove_all_handler(pid)
-    
 
-    
     @reactive.effect
     @reactive.event(input.place_order)
     def _():
@@ -825,4 +1049,3 @@ def server(input, output, session):
         ui.notification_show("Cart cleared!", type="info")
 
 app = App(app_ui, server)
-

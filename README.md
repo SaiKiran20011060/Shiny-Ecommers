@@ -22,8 +22,8 @@ For testing purposes, you can use these demo emails:
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/shiny-ecommerce.git
-cd shiny-ecommerce
+git clone https://github.com/SaiKiran20011060/Shiny-Ecommers.git
+cd Shiny-Ecommers
 ```
 
 2. Install dependencies:
@@ -33,7 +33,7 @@ pip install -r requirements.txt
 
 3. Run the application:
 ```bash
-python shinyecomm.py
+python app.py
 ```
 
 4. Open your browser and navigate to the URL shown in the terminal (typically `http://127.0.0.1:8000`)
@@ -41,9 +41,13 @@ python shinyecomm.py
 ## Project Structure
 
 ```
-shiny-ecommerce/
-├── shinyecomm.py          # Main application file
+Shiny-Ecommers/
+├── shinyecomm.py          # Main application logic
+├── app.py                 # Application entry point
 ├── requirements.txt       # Python dependencies
+├── Dockerfile            # Docker configuration
+├── render.yaml           # Render.com deployment config
+├── .github/workflows/    # GitHub Actions
 ├── README.md             # Project documentation
 └── .gitignore           # Git ignore file
 ```
@@ -74,6 +78,24 @@ shiny-ecommerce/
 ## License
 
 This project is open source and available under the [MIT License](LICENSE).
+
+## Deployment
+
+### Local Development
+```bash
+python app.py
+```
+
+### Docker Deployment
+```bash
+docker build -t shiny-ecommerce .
+docker run -p 8000:8000 shiny-ecommerce
+```
+
+### Cloud Deployment
+- **Render.com**: Connect your GitHub repository and deploy using `render.yaml`
+- **Heroku**: Use the included `Dockerfile` for container deployment
+- **Railway**: Connect GitHub repo for automatic deployment
 
 ## Contact
 

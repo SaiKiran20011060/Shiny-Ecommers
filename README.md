@@ -1,4 +1,4 @@
-# Shiny E-Commerce Application
+# Shiny E-Commerce Application -- https://01992a0e-dc7c-e0ad-817e-c126b6933dc8.share.connect.posit.cloud/
 
 A Demo modern e-commerce web application built with Python Shiny, featuring user authentication, shopping cart functionality, order management, and analytics dashboard.
 

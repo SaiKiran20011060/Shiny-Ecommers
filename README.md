@@ -1,6 +1,6 @@
 # Shiny E-Commerce Application
 
-A modern e-commerce web application built with Python Shiny, featuring user authentication, shopping cart functionality, order management, and analytics dashboard.
+A Demo modern e-commerce web application built with Python Shiny, featuring user authentication, shopping cart functionality, order management, and analytics dashboard.
 
 ## Features
 
